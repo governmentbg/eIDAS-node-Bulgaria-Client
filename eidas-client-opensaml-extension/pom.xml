@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>eidas-client-parent</artifactId>
+        <groupId>bg.is.eidas</groupId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>eidas-client-opensaml-extension</artifactId>
+
+    <properties>
+        <opensaml.version>3.4.6</opensaml.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.opensaml</groupId>
+            <artifactId>opensaml-core</artifactId>
+            <version>${opensaml.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.opensaml</groupId>
+            <artifactId>opensaml-saml-api</artifactId>
+            <version>${opensaml.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.opensaml</groupId>
+            <artifactId>opensaml-saml-impl</artifactId>
+            <version>${opensaml.version}</version>
+            <exclusions>
+                <!-- Fix CVE-2020-13936 by replacing velocity with new version of velocity-engine-core.
+                     TODO Remove this property after upgrading opensaml-saml-impl.-->
+                <exclusion>
+                    <groupId>org.apache.velocity</groupId>
+                    <artifactId>velocity</artifactId>
+                </exclusion>
+                <!-- Excluded because we are already using bcprov-jdk18on as a dependency.-->
+                <exclusion>
+                    <groupId>org.bouncycastle</groupId>
+                    <artifactId>bcprov-jdk15on</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <!-- Fix CVE-2020-13936 by replacing velocity with new version of velocity-engine-core.
+                 TODO Remove this property after upgrading opensaml-saml-impl.-->
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity-engine-core</artifactId>
+            <version>2.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.opensaml</groupId>
+            <artifactId>opensaml-messaging-impl</artifactId>
+            <version>${opensaml.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>se.swedenconnect.opensaml</groupId>
+            <artifactId>opensaml-security-ext</artifactId>
+            <!-- TODO 2.x isn't compatible with Java 8. -->
+            <version>1.0.8</version>
+            <exclusions>
+                <!-- Excluded because we are already using bcprov-jdk18on as a dependency.-->
+                <exclusion>
+                    <groupId>org.bouncycastle</groupId>
+                    <artifactId>bcprov-jdk15on</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk18on</artifactId>
+            <version>1.75</version>
+        </dependency>
+        <dependency>
+            <groupId>net.shibboleth.utilities</groupId>
+            <artifactId>java-support</artifactId>
+            <!-- TODO 8.x isn't compatible with Java 8. -->
+            <version>7.5.2</version>
+        </dependency>
+        <dependency>
+            <groupId>net.shibboleth.ext</groupId>
+            <artifactId>spring-extensions</artifactId>
+            <!-- TODO 6.x isn't compatible with Java 8. -->
+            <version>5.4.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Override dependencies -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>4.4</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>32.1.1-jre</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.santuario</groupId>
+            <artifactId>xmlsec</artifactId>
+            <version>3.0.2</version>
+        </dependency>
+        <dependency>
+            <!-- Using newer version of woodstox-core than xmlsec's default to fix vulnerability CVE-2022-40152 -->
+            <groupId>com.fasterxml.woodstox</groupId>
+            <artifactId>woodstox-core</artifactId>
+            <version>6.5.1</version>
+        </dependency>
+
+        <!-- hazelcast and it's custom content protection -->
+        <dependency>
+            <groupId>com.hazelcast</groupId>
+            <artifactId>hazelcast-spring</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-core</artifactId>
+            <version>1.11.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bitbucket.b_c</groupId>
+            <artifactId>jose4j</artifactId>
+            <version>0.9.3</version>
+        </dependency>
+
+        <!-- test dependencies -->
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>test-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>org.opensaml</id>
+            <url>https://build.shibboleth.net/nexus/content/repositories/releases</url>
+        </repository>
+    </repositories>
+
+</project>
