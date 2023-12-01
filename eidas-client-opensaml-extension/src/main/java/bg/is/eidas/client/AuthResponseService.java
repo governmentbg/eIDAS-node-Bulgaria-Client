@@ -96,7 +96,8 @@ public class AuthResponseService {
             log.info("Decrypted Assertion ID: {}", assertion.getID());
             if (log.isDebugEnabled())
                 log.debug("Decrypted Assertion: {}", OpenSAMLUtils.getXmlString(assertion));
-
+            AuthenticationResult result = new AuthenticationResult(assertion);
+            result.setRequestId(samlResponse.getInResponseTo());
             return new AuthenticationResult(assertion);
         } catch (InvalidRequestException exception) {
             throw new InvalidRequestException("Invalid SAMLResponse. " + exception.getMessage(), exception);

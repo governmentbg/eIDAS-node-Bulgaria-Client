@@ -2,17 +2,21 @@ package bg.is.eidas.client.config;
 
 import bg.is.eidas.client.config.EidasClientProperties.HsmProperties;
 import bg.is.eidas.client.exception.EidasClientException;
+import java.io.File;
+import java.nio.file.Files;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.opensaml.security.credential.Credential;
 import org.opensaml.security.x509.BasicX509Credential;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.util.ResourceUtils;
 import sun.security.pkcs11.SunPKCS11;
 
 import java.io.ByteArrayInputStream;
@@ -32,13 +36,17 @@ import static java.nio.charset.StandardCharsets.ISO_8859_1;
 public class EidasCredentialsConfiguration {
     private final EidasClientProperties eidasClientProperties;
     private final HsmProperties hsmProperties;
+    @Value("#{environment.SERVICE_PROVIDER_CONFIG_REPOSITORY}")
+    private String repo;
 
     @Bean
     public KeyStore softwareKeystore(ResourceLoader resourceLoader) {
         try {
             KeyStore keystore = KeyStore.getInstance(KeyStore.getDefaultType());
-            Resource resource = resourceLoader.getResource(eidasClientProperties.getKeystore());
-            keystore.load(resource.getInputStream(), eidasClientProperties.getKeystorePass().toCharArray());
+            File storeFile = ResourceUtils.getFile(repo + File.separator + eidasClientProperties.getKeystore());
+            keystore.load(Files.newInputStream(storeFile.toPath()), eidasClientProperties.getKeystorePass().toCharArray());
+            //Resource resource = resourceLoader.getResource(eidasClientProperties.getKeystore());
+            //keystore.load(resource.getInputStream(), eidasClientProperties.getKeystorePass().toCharArray());
             return keystore;
         } catch (Exception e) {
             throw new EidasClientException("Something went wrong reading the software keystore", e);

@@ -18,6 +18,8 @@ import java.util.stream.Collectors;
 @JsonInclude(Include.NON_NULL)
 public class AuthenticationResult {
 
+    private String requestId;
+
     private String levelOfAssurance;
 
     private Map<String, String> attributes = new HashMap<>();
@@ -97,5 +99,13 @@ public class AuthenticationResult {
 
     public void setAttributesTransliterated(Map<String, String> attributesTransliterated) {
         this.attributesTransliterated = attributesTransliterated;
+    }
+
+    public String getRequestId() {
+        return requestId;
+    }
+
+    public void setRequestId(String requestId) {
+        this.requestId = requestId;
     }
 }
