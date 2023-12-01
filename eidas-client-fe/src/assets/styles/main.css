@@ -1,0 +1,102 @@
+html {
+    background-color: #ddd;
+    background-image: -moz-linear-gradient(#aaa, #ddd);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #aaa), color-stop(1, #ddd));
+    background-image: linear-gradient(#aaa, #ddd);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#aaaaaa', EndColorStr='#dddddd');
+    background-repeat: no-repeat;
+    height: 100%;
+    /* change the box model to exclude the padding from the calculation of 100% height (IE8+) */
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html * {
+    margin: 0;
+}
+
+body {
+    background: #ffffff;
+    color: #333333;
+    margin: 0 auto;
+    max-width:100%;
+    min-width: 1024px;
+}
+
+h1 {
+    font-weight: normal;
+    font-size: 1.3em;
+    color: #ffffff;
+}
+
+.blog-header {
+    background-color: #7399C0;
+    padding: 2% !important;
+}
+
+.systemInformation {
+    color: #ffffff;
+}
+
+#person{
+    margin-left: auto;
+    margin-right: 0;
+
+}
+
+.navbar{
+    display: flex;
+    justify-content: space-between !important;
+}
+
+.container {
+    margin-top: 20px !important;
+    margin-bottom: 20px !important;
+    padding-left: 50px !important;
+    padding-right: 50px !important;
+    min-width: 100%;
+}
+
+.p-calendar {
+    min-width: 100%;
+    max-width: 100%;
+}
+
+
+.divMarginTop10px{
+    margin-top: 10px;
+}
+
+
+.footer-copyright {
+    background-color: #7399C0;
+}
+
+.footer-copyright a {
+    color: white;
+}
+
+form-control border-0 m-0{
+    background-color: white;
+}
+
+.loader {  /* Loader Div Class */
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: #eceaea;
+    background-image: url('../loading.gif');
+    background-size: 100px;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 10000000;
+    opacity: 0.4;
+    filter: alpha(opacity=40);
+}
+
+.dropdown-custom {
+    width: 100%;
+}

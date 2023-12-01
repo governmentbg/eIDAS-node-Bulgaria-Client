@@ -1,0 +1,36 @@
+target
+conf
+.idea
+*.iml
+**/.DS_Store
+settings.xml
+
+### Maven ###
+.mvn/wrapper/maven-wrapper.jar
+
+###public###
+eidas-client-webapp/src/main/resources/public/**
+
+.DS_Store
+eidas-client-fe/node_modules
+eidas-client-fe/dist
+
+
+# local env files
+.env.local
+.env.*.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
