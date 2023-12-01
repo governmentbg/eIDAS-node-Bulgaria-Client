@@ -7,6 +7,7 @@ public class EidasClientApi {
 
     public static final String ENDPOINT_AUTHENTICATION_LOGIN = "/login";
     public static final String ENDPOINT_AUTHENTICATION_RETURN_URL = "/returnUrl";
+    public static final String ENDPOINT_AUTHENTICATION_RETURN_URL_REST = "/returnUrlRest";
 
     private EidasClientApi() { throw new IllegalStateException("Utility class"); }
 

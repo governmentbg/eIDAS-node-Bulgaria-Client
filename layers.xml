@@ -12,6 +12,9 @@
         <into layer="snapshot-dependencies">
             <include>*:*:*SNAPSHOT</include>
         </into>
+        <into layer="internal-dependencies">
+            <include>ee.ria.eidas*:*:*</include>
+        </into>
         <into layer="dependencies" />
     </dependencies>
     <layerOrder>

@@ -135,6 +135,16 @@ public class EidasClientProperties {
     @NotNull
     private List<EidasAttribute> allowedEidasAttributes = DEFAULT_ALLOWED_EIDAS_ATTRIBUTES;
 
+    private Boolean eavtActivateRedirectConfig;
+
+    private String eavtCallbackUrl;
+
+    private String eavtCallbackAuthRequestParam;
+
+    private String eavtTokenSecret;
+
+    private Long eavtTokenExpireInSeconds;
+
     @Data
     @Validated
     @ConfigurationProperties(prefix = "eidas.client.hsm")
